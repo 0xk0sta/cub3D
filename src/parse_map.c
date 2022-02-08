@@ -31,23 +31,6 @@ int	above_and_below(t_map **map, int i, int j, int x)
 	return (0);
 }
 
-/*int below(t_map **map, int i, int j, int x)
-{
-	char *tmp;
-
-
-	if (i >= dptr_len((*map)->map) || i <= 0)
-		return (-1);
-	tmp = (*map)->map[i];
-	while (j < x)
-	{
-		if (tmp[j] != '1')
-			return (-2);
-		j++;
-	}
-	return (0);
-}*/
-
 int	check_surroundings(t_map **map, int i, int j)
 {
 	int	x;
@@ -103,7 +86,6 @@ int	check_top_and_bot(char *line)
 	int	i;
 
 	i = -1;
-
 	while (line[++i] && (line[i] != '\n' && line[i] != '\0'))
 	{
 		if (line[i] != '1' && line[i] != ' ')
@@ -165,9 +147,6 @@ void	fill_map(t_map **map)
 			(*map)->index++;
 	}
 	(*map)->map[i] = NULL;
-	//i = -1;
-	//while ((*map)->map[++i])
-	//	printf("[%s]\n", (*map)->map[i]);
 }
 
 int	parse_map(t_map **map)
@@ -176,9 +155,7 @@ int	parse_map(t_map **map)
 
 	i = -1;
 	while ((*map)->buffer[(*map)->aux]
-		&& (*map)->buffer[(*map)->aux][0] == '\0') {
 		(*map)->aux++;
-	}
 	(*map)->index = (*map)->aux;
 	while ((*map)->aux <= ((*map)->lines) && (*map)->buffer[(*map)->aux])
 	{
