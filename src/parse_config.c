@@ -9,7 +9,6 @@ static int	read_colour(t_map **map, int i)
 	{
 		aux = ft_substr((*map)->buffer[i], 5, ft_strlen((*map)->buffer[i]));
 		(*map)->door = aux;
-		//free(aux);
 		return (0);
 	}
 	else if (ft_strncmp((*map)->buffer[i], "F", 1) == 0 || ft_strncmp((*map)->buffer[i], "C", 1) == 0)
@@ -73,7 +72,7 @@ static int	open_texture(t_map *map)
 	return (0);
 }
 
-int init_sprites(t_map *map, int i)
+int	init_sprites(t_map *map, int i)
 {
 	if (ft_strncmp(map->buffer[i], BS, ft_strlen(BS)) == 0)
 	{
@@ -106,22 +105,24 @@ int init_sprites(t_map *map, int i)
 int	parse_textures(t_map *map)
 {
 	int	i;
-	int ret;
+	int	ret;
 
 	i = -1;
 	while (map->buffer[++i] && (!map->no || !map->so || !map->we
-			|| !map->ea || !map->frgb || !map->crgb || !map->door || map->pos_index == -1 || map->sprite_cnt == -1))
+			|| !map->ea || !map->frgb || !map->crgb || !map->door
+			|| map->pos_index == -1 || map->sprite_cnt == -1))
 	{
 		if ((ft_strncmp(map->buffer[i], "\n", 1) == 0 || ft_strncmp(map->buffer[i], "\0", 1) == 0))
-			continue;
+			continue ;
 		else
 		{
 			ret = read_texture(&map, i);
 			if (ret == 1)
 			{
 				i = init_sprites(map, i);
-				if (i == -1 || (ft_strncmp(map->buffer[i], ES, ft_strlen(ES)) != 0
-								&& ft_strncmp(map->buffer[i], EP, ft_strlen(EP)) != 0))
+				if (i == -1 || (ft_strncmp(map->buffer[i], ES,
+							ft_strlen(ES)) != 0 && ft_strncmp(map->buffer[i],
+							EP, ft_strlen(EP)) != 0))
 					return (-1);
 			}
 			else if (ret == 0)
